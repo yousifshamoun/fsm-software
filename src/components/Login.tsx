@@ -1,5 +1,5 @@
 import React from 'react'
-
+import {Link} from "react-router-dom"
 const Login = () => {
   return (
     <div className="justify-center items-center flex">
@@ -21,9 +21,9 @@ const Login = () => {
         Forgot Password?
       </a>
     </div>
-      <button className="w-full mt-4 bg-sky-900 hover:bg-sky-700 text-white font-bold py-3 px-4 rounded focus:outline-none focus:shadow-outline" type="button">
+      <Link to = {"/dispatch"}className="w-full mt-4 bg-sky-900 hover:bg-sky-700 text-white font-bold py-3 px-4 rounded focus:outline-none focus:shadow-outline" type="button">
         Sign In
-      </button>
+      </Link>
   </form>
 </div>
   )
