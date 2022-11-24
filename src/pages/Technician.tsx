@@ -2,44 +2,91 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 const Technician = () => {
-    const [user, setUser] = useState({
-        name: "",
-        username: "",
-        email: "",
-    });
+    const [orders, setOrders] = useState([]);
     useEffect(() => {
         loadUser();
     }, []);
     const loadUser = async () => {
-        // const result = await axios.get(`http://localhost:8080/user/${id}`);
-        // setUser(result.data);
+        const result = await axios.get("http://localhost:8080/orders");
+        setOrders(result.data);
     };
     return (
-        <div className="container">
-            <div className="row">
-                <div className="col-md-6 offset-md-3 border rounded p-4 mt-2 shadow">
-                    <h2 className="text-center m-4">User Details</h2>
-                    <div className="card">
-                        <div className="card-header">
-                            {/* Details of user id : {user.id} */}
-                            <ul className="list-group list-group-flush">
-                                <li className="list-group-item">
-                                    <b>Name:</b> {user.name}
-                                </li>
-                                <li className="list-group-item">
-                                    <b>UserName:</b> {user.username}
-                                </li>
-                                <li className="list-group-item">
-                                    <b>Email:</b> {user.email}
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                    <Link className="btn btn-primary my-2" to={"/"}>
-                        Back to Home
-                    </Link>
-                </div>
-            </div>
+        <div className="w-full">
+            <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+                <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                    <tr>
+                        <th scope="col" className="py-3 px-6">
+                            Name
+                        </th>
+                        <th scope="col" className="py-3 px-6">
+                            Street
+                        </th>
+                        <th scope="col" className="py-3 px-6">
+                            Unit
+                        </th>
+                        <th scope="col" className="py-3 px-6">
+                            Zip
+                        </th>
+                        <th scope="col" className="py-3 px-6">
+                            Phone
+                        </th>
+                        <th scope="col" className="py-3 px-6">
+                            Job type
+                        </th>
+                        <th scope="col" className="py-3 px-6">
+                            Business Unit
+                        </th>
+                        <th scope="col" className="py-3 px-6">
+                            Date
+                        </th>
+                        <th scope="col" className="py-3 px-6">
+                            Time
+                        </th>
+                        <th scope="col" className="py-3 px-6">
+                            Marketing Campaign
+                        </th>
+                        <th scope="col" className="py-3 px-6">
+                            Priority
+                        </th>
+                        <th scope="col" className="py-3 px-6">
+                            Technician
+                        </th>
+                        <th scope="col" className="py-3 px-6">
+                            Tags
+                        </th>
+                        <th scope="col" className="py-3 px-6">
+                            Notes
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {orders.map((order: any, index) => (
+                        <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                            <th
+                                scope="row"
+                                className="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white"
+                            >
+                                {order.name}
+                            </th>
+                            <td className="py-4 px-6">{order.street}</td>
+                            <td className="py-4 px-6">{order.unit}</td>
+                            <td className="py-4 px-6">{order.zip}</td>
+                            <td className="py-4 px-6">{order.phone}</td>
+                            <td className="py-4 px-6">{order.job_type}</td>
+                            <td className="py-4 px-6">{order.business_unit}</td>
+                            <td className="py-4 px-6">{order.date}</td>
+                            <td className="py-4 px-6">{order.time}</td>
+                            <td className="py-4 px-6">
+                                {order.marketing_campaign}
+                            </td>
+                            <td className="py-4 px-6">{order.priority}</td>
+                            <td className="py-4 px-6">{order.technician}</td>
+                            <td className="py-4 px-6">{order.tags}</td>
+                            <td className="py-4 px-6">{order.notes}</td>
+                        </tr>
+                    ))}
+                </tbody>
+            </table>
         </div>
     );
 };
