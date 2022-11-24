@@ -1,9 +1,54 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import axios from "axios";
 const CustomerForm = () => {
+    let navigate = useNavigate();
+    const [order, setOrder] = useState({
+        name: "",
+        street: "",
+        unit: "",
+        zip: "",
+        phone: "",
+        job_type: "",
+        business_unit: "",
+        date: "",
+        time: "",
+        marketing_campaign: "",
+        priority: "",
+        technician: "",
+        tags: "",
+        notes: "",
+    });
+    const {
+        name,
+        street,
+        unit,
+        zip,
+        phone,
+        job_type,
+        business_unit,
+        date,
+        time,
+        marketing_campaign,
+        priority,
+        technician,
+        tags,
+        notes,
+    } = order;
+    const onInputChange = (e: any) => {
+        setOrder({
+            ...order,
+            [e.target.name]: e.target.value,
+        });
+    };
+    const onSubmit = async (e: any) => {
+        e.preventDefault();
+        await axios.post("http://localhost:8080/order", order);
+        navigate("/");
+    };
     return (
         <div className="flex justify-center items-center mt-10">
-            <form className="w-full max-w-4xl">
+            <form className="w-full max-w-4xl" onSubmit={(e) => onSubmit(e)}>
                 <p className="text-left font-bold text-xl my-2">
                     Customer Information
                 </p>
@@ -11,9 +56,11 @@ const CustomerForm = () => {
                     <div className="w-full md:w-1/4 px-2 mb-6 md:mb-0">
                         <input
                             className="appearance-none block w-full bg-white border border-gray-400 rounded py-2 px-4 leading-snug focus:outline-none focus:bg-white focus:border-gray-500"
-                            id="name"
+                            name="name"
+                            value={name}
                             type="text"
                             placeholder="Name"
+                            onChange={(e) => onInputChange(e)}
                         />
                     </div>
                     <div className="w-full md:w-1/4 px-2 mb-6 md:mb-0">
@@ -21,6 +68,9 @@ const CustomerForm = () => {
                             className="appearance-none block w-full bg-white border border-gray-400 rounded py-2 px-4 leading-snug focus:outline-none focus:bg-white focus:border-gray-500"
                             id="street-address"
                             type="text"
+                            name="street"
+                            value={street}
+                            onChange={(e) => onInputChange(e)}
                             placeholder="Street"
                         />
                     </div>
@@ -28,7 +78,9 @@ const CustomerForm = () => {
                     <div className="w-full md:w-1/12 px-1 mb-6 md:mb-0">
                         <input
                             className="appearance-none block w-full bg-white border border-gray-400 rounded py-2 px-4 leading-snug focus:outline-none focus:bg-white focus:border-gray-500"
-                            id=""
+                            name="unit"
+                            value={unit}
+                            onChange={(e) => onInputChange(e)}
                             type="text"
                             placeholder="Unit"
                         />
@@ -37,6 +89,9 @@ const CustomerForm = () => {
                         <input
                             className="appearance-none block w-full bg-white border border-gray-400 rounded py-2 px-4 leading-snug focus:outline-none focus:bg-white focus:border-gray-500"
                             id="grid-zip"
+                            name="zip"
+                            value={zip}
+                            onChange={(e) => onInputChange(e)}
                             type="text"
                             placeholder="Zip"
                         />
@@ -45,6 +100,9 @@ const CustomerForm = () => {
                         <input
                             className="appearance-none block w-full bg-white border border-gray-400 rounded py-2 px-4 leading-snug focus:outline-none focus:bg-white focus:border-gray-500"
                             id="phone"
+                            name="phone"
+                            value={phone}
+                            onChange={(e) => onInputChange(e)}
                             type="tel"
                             placeholder="Phone"
                         />
@@ -61,6 +119,9 @@ const CustomerForm = () => {
                             <select
                                 className="first-letter:block appearance-none w-full bg-white border border-gray-400 py-2 px-4 pr-8 rounded leading-snug focus:outline-none focus:bg-white focus:border-gray-500 "
                                 id="grid-state"
+                                name="job_type"
+                                value={job_type}
+                                onChange={(e) => onInputChange(e)}
                             >
                                 <option value="" disabled selected>
                                     Select a Job Type
@@ -88,6 +149,9 @@ const CustomerForm = () => {
                             <select
                                 className="block appearance-none w-full bg-white border border-gray-400 py-2 px-4 pr-8 rounded leading-snug focus:outline-none focus:bg-white focus:border-gray-500"
                                 id="grid-state"
+                                name="business_unit"
+                                value={business_unit}
+                                onChange={(e) => onInputChange(e)}
                             >
                                 <option value="" disabled selected>
                                     Select a Job Type
@@ -116,6 +180,9 @@ const CustomerForm = () => {
                             id="date"
                             type="date"
                             placeholder=""
+                            name="date"
+                            value={date}
+                            onChange={(e) => onInputChange(e)}
                         />
                     </div>
                     <div className="w-full md:w-1/6 px-2 mb-6 md:mb-0">
@@ -128,6 +195,9 @@ const CustomerForm = () => {
                             step={60}
                             type="time"
                             placeholder="Set a time"
+                            name="time"
+                            value={time}
+                            onChange={(e) => onInputChange(e)}
                         />
                     </div>
                 </div>
@@ -140,6 +210,9 @@ const CustomerForm = () => {
                             <select
                                 className="first-letter:block appearance-none w-full bg-white border border-gray-400 py-2 px-4 pr-8 rounded leading-snug focus:outline-none focus:bg-white focus:border-gray-500"
                                 id="grid-state"
+                                name="marketing_campaign"
+                                value={marketing_campaign}
+                                onChange={(e) => onInputChange(e)}
                             >
                                 <option value="" disabled selected>
                                     Select a Marketing Campaign
@@ -167,6 +240,9 @@ const CustomerForm = () => {
                             <select
                                 className="block appearance-none w-full bg-white border border-gray-400 py-2 px-4 pr-8 rounded leading-snug focus:outline-none focus:bg-white focus:border-gray-500"
                                 id="grid-state"
+                                name="priority"
+                                value={priority}
+                                onChange={(e) => onInputChange(e)}
                             >
                                 <option value="" disabled selected>
                                     Select a Job Type
@@ -194,6 +270,9 @@ const CustomerForm = () => {
                             <select
                                 className="block appearance-none w-full bg-white border border-gray-400 py-2 px-4 pr-8 rounded leading-snug focus:outline-none focus:bg-white focus:border-gray-500"
                                 id="grid-state"
+                                name="technician"
+                                value={technician}
+                                onChange={(e) => onInputChange(e)}
                             >
                                 <option value="" disabled selected>
                                     Select a Technician
@@ -223,6 +302,9 @@ const CustomerForm = () => {
                             className="w-full appearance-none block bg-white border border-gray-400 rounded py-2 px-4 leading-snug focus:outline-none focus:bg-white focus:border-gray-500"
                             id="tags"
                             type="text"
+                            name="tags"
+                            value={tags}
+                            onChange={(e) => onInputChange(e)}
                         />
                     </div>
                 </div>
@@ -238,13 +320,16 @@ const CustomerForm = () => {
                             id="notes"
                             cols={40}
                             placeholder="Summary of the job details."
+                            name="notes"
+                            value={notes}
+                            onChange={(e) => onInputChange(e)}
                         />
                     </div>
                 </div>
                 <div className="flex flex-row">
                     <button
-                        type="button"
                         className="align-left flex text-white bg-gradient-to-r from-green-500 via-green-600 to-green-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-green-300 dark:focus:ring-green-800 font-medium rounded-lg text-sm px-6 py-2 text-center mr-4 mb-2"
+                        type="submit"
                     >
                         Save Job
                     </button>

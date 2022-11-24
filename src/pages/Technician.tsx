@@ -1,6 +1,5 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
 const Technician = () => {
     const [orders, setOrders] = useState([]);
     useEffect(() => {
@@ -34,28 +33,19 @@ const Technician = () => {
                             Job type
                         </th>
                         <th scope="col" className="py-3 px-6">
-                            Business Unit
-                        </th>
-                        <th scope="col" className="py-3 px-6">
                             Date
                         </th>
                         <th scope="col" className="py-3 px-6">
                             Time
                         </th>
                         <th scope="col" className="py-3 px-6">
-                            Marketing Campaign
-                        </th>
-                        <th scope="col" className="py-3 px-6">
                             Priority
                         </th>
                         <th scope="col" className="py-3 px-6">
-                            Technician
-                        </th>
-                        <th scope="col" className="py-3 px-6">
-                            Tags
-                        </th>
-                        <th scope="col" className="py-3 px-6">
                             Notes
+                        </th>
+                        <th scope="col" className="py-3 px-6">
+                            Action
                         </th>
                     </tr>
                 </thead>
@@ -73,16 +63,29 @@ const Technician = () => {
                             <td className="py-4 px-6">{order.zip}</td>
                             <td className="py-4 px-6">{order.phone}</td>
                             <td className="py-4 px-6">{order.job_type}</td>
-                            <td className="py-4 px-6">{order.business_unit}</td>
                             <td className="py-4 px-6">{order.date}</td>
                             <td className="py-4 px-6">{order.time}</td>
                             <td className="py-4 px-6">
-                                {order.marketing_campaign}
+                                <p
+                                    className={`font-bold
+                                        ${
+                                            order.priority === "High"
+                                                ? "text-red-600"
+                                                : "text-orange-300"
+                                        }`}
+                                >
+                                    {order.priority}
+                                </p>
                             </td>
-                            <td className="py-4 px-6">{order.priority}</td>
-                            <td className="py-4 px-6">{order.technician}</td>
-                            <td className="py-4 px-6">{order.tags}</td>
                             <td className="py-4 px-6">{order.notes}</td>
+                            <td className="py-4 px-6">
+                                <button
+                                    type="button"
+                                    className="align-left flex text-white bg-gray-400 font-medium rounded-lg text-sm px-6 py-2 text-center mr-4 mb-2"
+                                >
+                                    View
+                                </button>
+                            </td>
                         </tr>
                     ))}
                 </tbody>
