@@ -5,6 +5,7 @@ import "./App.css";
 import Dispatch from "./pages/Dispatch";
 import Technician from "./pages/Technician";
 import Home from "./pages/Home";
+import ViewOrder from "./pages/ViewOrder";
 function App() {
     return (
         <div className="App">
@@ -13,6 +14,7 @@ function App() {
                     <Route path="/" element={<Home />} />
                     <Route path="/dispatch" element={<Dispatch />} />
                     <Route path="/technician" element={<Technician />} />
+                    <Route path="/vieworder/:id" element={<ViewOrder />} />
                 </Routes>
             </Router>
         </div>

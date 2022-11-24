@@ -1,5 +1,6 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 const Technician = () => {
     const [orders, setOrders] = useState([]);
     useEffect(() => {
@@ -79,12 +80,12 @@ const Technician = () => {
                             </td>
                             <td className="py-4 px-6">{order.notes}</td>
                             <td className="py-4 px-6">
-                                <button
-                                    type="button"
+                                <Link
+                                    to={`/vieworder/${order.id}`}
                                     className="align-left flex text-white bg-gray-400 font-medium rounded-lg text-sm px-6 py-2 text-center mr-4 mb-2"
                                 >
                                     View
-                                </button>
+                                </Link>
                             </td>
                         </tr>
                     ))}
