@@ -1,5 +1,3 @@
-import React from "react";
-import logo from "./logo.svg";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import "./App.css";
 import Dispatch from "./pages/Dispatch";
@@ -13,7 +11,10 @@ function App() {
                 <Routes>
                     <Route path="/" element={<Home />} />
                     <Route path="/dispatch" element={<Dispatch />} />
-                    <Route path="/technician" element={<Technician />} />
+                    <Route
+                        path="/technician/:technician"
+                        element={<Technician />}
+                    />
                     <Route path="/vieworder/:id" element={<ViewOrder />} />
                 </Routes>
             </Router>

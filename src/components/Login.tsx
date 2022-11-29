@@ -1,6 +1,10 @@
-import React from "react";
+import { useState } from "react";
 import { Link } from "react-router-dom";
 const Login = () => {
+    const [technician, setTechnician] = useState("");
+    const onInputChange = (e: any) => {
+        setTechnician(e.target.value);
+    };
     return (
         <div className="justify-center items-center flex">
             <form className="px-80 mx-20 mt-4 w-full">
@@ -16,6 +20,8 @@ const Login = () => {
                         id="username"
                         type="text"
                         placeholder="Username"
+                        value={technician}
+                        onChange={(e) => onInputChange(e)}
                     />
                 </div>
                 <div className="mb-2">
@@ -34,7 +40,7 @@ const Login = () => {
                 </div>
                 <div className="flex items-center justify-between">
                     <Link
-                        to={"/technician"}
+                        to={`/technician/${technician}`}
                         className="text-left text-sm text-sky-900 hover:text-sky-700"
                     >
                         Forgot Password?
